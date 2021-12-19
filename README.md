@@ -19,7 +19,7 @@ and the other users commint on the post to help or even arrange meeting to disco
 - **Messages:** As a user I can seand private  messages to Another user 
 - **Friend:** As a user I can add user to firends list and follow thers posts
 
-##Admin Story 
+## Admin Story 
 - **Deleat posts:** As a Admin I can deleat any post  
 - **Deleat Commint:** As a Admin I can deleat any Commint 
 - **banned  user:** As a Admin I can banned any user from commint and post 
@@ -33,7 +33,25 @@ and the other users commint on the post to help or even arrange meeting to disco
 
 User model
 
-```
+
+| key        | type            | options          | default value |
+| ---------- | --------------- | ---------------- | ------------- |
+| username   | String          | required, unique | n/a           |
+| email      | String          | required, unique | n/a           |
+| password   | String          | required         | n/a           |
+| Phonenumber| String          |  unique          | n/a           |
+| SEX        | String          |   n/a            | n/a           |
+| HomeTown   | String          |   n/a            | n/a           |
+| Bio        | String          |   n/a            | n/a           |
+| Avatar     | String          |   n/a            | n/a           |
+| VistedContry| String         |   n/a            | n/a           |
+| roles      | Schema <roles>  | required         | n/a           |
+| isbanned   | Boolean         |   n/a            | false         |
+| isdel      | Boolean         |   n/a            | false         |
+| Activate   | Boolean         |   n/a            | false         |
+User Schema
+
+  ```
 {
   username: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
@@ -53,6 +71,19 @@ User model
 
 
 Post model
+| key        | type            | options          | default value |
+| ---------- | --------------- | ---------------- | ------------- |
+| Titel      | String          | required,        | n/a           |
+| img        | String          |    n/a           | n/a           |
+| post       | String          | required         | n/a           |
+| date       | String          |  unique          | new Date()    |
+| Comment    | Schema <comment>|    required      | n/a           |
+| creator    |Schema <user>    |   required       | n/a           |
+| like       |Schema <like>    |    n/a           | n/a           |
+| tag        | String          |    n/a           | n/a           |
+| isclose    | Boolean         |                  | false         |
+| isdel      | Boolean         |                  | false         |
+Post Schema
 
 ```
  {
@@ -72,6 +103,21 @@ Post model
  }
 ```
 meetup model
+| key        | type            | options          | default value |
+| ---------- | --------------- | ---------------- | ------------- |
+| Titel      | String          | required,        | n/a           |
+| img        | String          |    n/a           | n/a           |
+| dese       | String          | required         | n/a           |
+| date       | String          |  unique          | new Date()    |
+| Comment    | Schema <comment>|    required      | n/a           |
+| creator    |Schema <user>    |   required       | n/a           |
+| like       |Schema <like>    |    n/a           | n/a           |
+| tag        | String          |    n/a           | n/a           |
+| isclose    | Boolean         |                  | false         |
+| isdel      | Boolean         |                  | false         |
+  
+  
+meetup Schema
 
 ```
  {
@@ -91,6 +137,21 @@ meetup model
  }
 ```
 service model
+| key        | type            | options          | default value |
+| ---------- | --------------- | ---------------- | ------------- |
+| Titel      | String          | required,        | n/a           |
+| img        | String          |    n/a           | n/a           |
+| dese       | String          | required         | n/a           |
+| date       | String          |  unique          | new Date()    |
+| price      | Number          |  required        | n/a           |
+| Comment    | Schema <comment>|    required      | n/a           |
+| creator    |Schema <user>    |   required       | n/a           |
+| raet       |Schema <raet>    |    n/a           | n/a           |
+| tag        | String          |    n/a           | n/a           |
+| isclose    | Boolean         |                  | false         |
+| isdel      | Boolean         |                  | false         |
+  
+  service Schema
 
 ```
  {
@@ -116,25 +177,25 @@ service model
 
 | HTTP Method | URL            | Request Body                                                 | Success status | Error Status | Description                                                  |
 | ----------- | -------------- | ------------------------------------------------------------ | -------------- | ------------ | ------------------------------------------------------------ |
-| GET         | `/login/:id`     |                                                              | 200            | 404          | Check if user is logged in and return profile page           |
+| GET         | `/login/:id`     | n/a                                                          | 200            | 404          | Check if user is logged in and return profile page           |
 | POST        | `/signup` | {username, email, password}                                    | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
 | POST        | `/login`  | {email, password}                                         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
-| POST        | `/logout` | (empty)                                                      | 204            | 400          | Logs out the user                                            |
-| GET         | /post/:id         | (empty) | 200               | 404             |Used to get one post by id . |
-| GET         | /posts         | (empty) | 200               | 404             |Used to get all posts. |
-| PUT         | /post/:id  | {username, img, titel, post, tag |  201           | 400          | Used to update one post by id                 |
-| POST        | /post/creta| {username, img, titel, post, tag} |                |              | Used to create post , using current logged in user id as a creator. |
-| DELETE      | /post/:id  |                                                              | 200            | 401          | Used to delete one post id                 |
-| GET         | /meetup/:id   | (empty) | 200               | 404             |Used to get one meetup by id|
-| GET         | /meetsup        | (empty) | 200               | 404             |Used to get all meetup. |
-| PUT         | /meetup/:id  | {username, img, titel, post, tag,|  201           | 400          | Used to update one meetup by id .          |
-| POST        | /meetup/creta| {username, img, titel, post, tag} |                |              | Used to create meetup , using current logged in user id as a creator. |
-| DELETE      | /meetup/:id  |                                                              | 200            | 401          | Used to delete one meetup by id .            |
-| GET         | /service/:id  | (empty) | 200               | 404             |Used to get one service by id|
-| GET         | /services       | (empty) | 200               | 404             |Used to get all service. |
-| PUT         | /service/:id  | {username, img, titel, post, tag,|  201           | 400          | Used to update one service by id .          |
-| POST        | /service/creta| {username, img, titel, post, tag} |                |              | Used to create service , using current logged in user id as a creator. |
-| DELETE      | /service/:id  |                                                              | 200            | 401          | Used to delete one service by id .            |
+| POST        | `/logout` | n/a                                                      | 204            | 400          | Logs out the user                                            |
+| GET         | `/post/:id`        | n/a | 200               | 404             |Used to get one post by id . |
+| GET         | `/posts`         | n/a | 200               | 404             |Used to get all posts. |
+| PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400          | Used to update one post by id                 |
+| POST        | `/post/creta`| {username, img, titel, post, tag} |                |              | Used to create post , using current logged in user id as a creator. |
+| DELETE      | `/post/:id`  |  n/a                                                        | 200            | 401          | Used to delete one post id                 |
+| GET         | `/meetup/:id`   | n/a | 200               | 404             |Used to get one meetup by id|
+| GET         | `/meetsup`        | n/a | 200               | 404             |Used to get all meetup. |
+| PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one meetup by id .          |
+| POST        | `/meetup/creta`| {username, img, titel, post, tag} |                |              | Used to create meetup , using current logged in user id as a creator. |
+| DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401          | Used to delete one meetup by id .            |
+| GET         | `/service/:id`  | n/a | 200               | 404             |Used to get one service by id|
+| GET         | `/services`       | n/a | 200               | 404             |Used to get all service. |
+| PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one service by id .          |
+| POST        | `/service/creta`| {username, img, titel, post, tag} |                |              | Used to create service , using current logged in user id as a creator. |
+| DELETE      | `/service/:id`  | n/a                                                          | 200            | 401          | Used to delete one service by id .            |
 ## Links
 ### Trello
 [Link to your trello board](https://trello.com/mpprojecthaitham) 
