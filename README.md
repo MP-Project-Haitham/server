@@ -186,19 +186,19 @@ service model
 | POST        | `/logout` | n/a                                                      | 204            | 400          |  Permissions                | Logs out the user                                            |
 | GET         | `/post/:id`        | n/a | 200               | 404             |Used to get one post by id . |
 | GET         | `/posts`         | n/a | 200               | 404             |Used to get all posts. |
-| PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400          | Used to update one post by id                 |
-| POST        | `/post/creta`| {username, img, titel, post, tag} | 201            | 400         | Used to create post , using current logged in user id as a creator. |
-| DELETE      | `/post/:id`  |  n/a                                                        | 200            | 401          | Used to delete one post id                 |
+| PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400      |  Permissions    | Used to update one post by id                 |
+| POST        | `/post/creta`| {username, img, titel, post, tag} | 201            | 400     |  Permissions    | Used to create post , using current logged in user id as a creator. |
+| DELETE      | `/post/:id`  |  n/a                                                        | 200            | 401    |  Permissions      | Used to delete one post id                 |
 | GET         | `/meetup/:id`   | n/a | 200               | 404             |Used to get one meetup by id|
 | GET         | `/meetsup`        | n/a | 200               | 404             |Used to get all meetup. |
-| PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one meetup by id .          |
-| POST        | `/meetup/creta`| {username, img, titel, post, tag} | 201            | 400         | Used to create meetup , using current logged in user id as a creator. |
-| DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401          | Used to delete one meetup by id .            |
-| GET         | `/service/:id`  | n/a | 200               | 404             |Used to get one service by id|
-| GET         | `/services`       | n/a | 200               | 404             |Used to get all service. |
-| PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one service by id .          |
-| POST        | `/service/creta`| {username, img, titel, post, tag} | 201            | 400          | Used to create service , using current logged in user id as a creator. |
-| DELETE      | `/service/:id`  | n/a                                             | 200            | 401          | Used to delete one service by id .            |
+| PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400   |  Permissions       | Used to update one meetup by id .          |
+| POST        | `/meetup/creta`| {username, img, titel, post, tag} | 201            | 400     |  Permissions    | Used to create meetup , using current logged in user id as a creator. |
+| DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401   |  Permissions       | Used to delete one meetup by id .            |
+| GET         | `/service/:id`  | n/a | 200               | 404      |  Permissions       |Used to get one service by id|
+| GET         | `/services`       | n/a | 200               | 404      |  Permissions       |Used to get all service. |
+| PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400     |  Permissions     | Used to update one service by id .          |
+| POST        | `/service/creta`| {username, img, titel, post, tag} | 201            | 400     |  Permissions     | Used to create service , using current logged in user id as a creator. |
+| DELETE      | `/service/:id`  | n/a                                             | 200            | 401    |  Permissions      | Used to delete one service by id .            |
 ## Links
 ### Trello
 [Link to your trello board](https://trello.com/mpprojecthaitham) 
