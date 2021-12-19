@@ -178,8 +178,8 @@ service model
 
 ## Backend routes
 
-| HTTP Method | URL            | Request Body                                                 | Success status | Error Status | Description                                                  |
-| ----------- | -------------- | ------------------------------------------------------------ | -------------- | ------------ | ------------------------------------------------------------ |
+| HTTP Method | URL            | Request Body       | Permissions                |                                           | Success status | Error Status | Description                                                  |
+| ----------- | -------------- | -------------------|----------------------------|----------- | -------------- | ------------ | ------------------------------------------------------------ |
 | GET         | `/login/:id`     | n/a                                                          | 200            | 404          | Check if user is logged in and return profile page           |
 | POST        | `/signup` | {username, email, password}                                    | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
 | POST        | `/login`  | {email, password}                                         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
