@@ -19,7 +19,7 @@ and the other users commint on the post to help or even arrange meeting to disco
 - **Messages:** As a user I can seand private  messages to Another user 
 - **Friend:** As a user I can add user to firends list and follow thers posts
 
-##Admin Story 
+## Admin Story 
 - **Deleat posts:** As a Admin I can deleat any post  
 - **Deleat Commint:** As a Admin I can deleat any Commint 
 - **banned  user:** As a Admin I can banned any user from commint and post 
