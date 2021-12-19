@@ -196,7 +196,7 @@ service model
 | GET         | `/service/:id`  | n/a | 200               | 404             |Used to get one service by id|
 | GET         | `/services`       | n/a | 200               | 404             |Used to get all service. |
 | PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one service by id .          |
-| POST        | `/service/creta`| {username, img, titel, post, tag} |                |              | Used to create service , using current logged in user id as a creator. |
+| POST        | `/service/creta`| {username, img, titel, post, tag} | 201            | 400          | Used to create service , using current logged in user id as a creator. |
 | DELETE      | `/service/:id`  | n/a                                                          | 200            | 401          | Used to delete one service by id .            |
 ## Links
 ### Trello
