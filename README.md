@@ -205,9 +205,9 @@ service model
 ### Git
 
 
-[Client repository Link](https://github.com/MP-Project-Haitham/server)
+[Client repository Link](https://github.com/MP-Project-Haitham/client)
 
-[Server repository Link](https://github.com/MP-Project-Haitham/client)
+[Server repository Link](https://github.com/MP-Project-Haitham/server)
 
 [Deployed App Link](https://github.com/MP-Project-Haitham)
 ### Slides
