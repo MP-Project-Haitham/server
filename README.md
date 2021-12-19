@@ -174,6 +174,8 @@ service model
    
  }
 ```
+## ERD
+![ERD](./img/ERD.png)
 
 
 ## Backend routes
@@ -199,7 +201,11 @@ service model
 | PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400     |  public `<Route>`     | Used to update one service by id .          |
 | POST        | `/service/creta`| {username, img, titel, post, tag} | 201            | 400     |  user only `<PrivateRoute>`     | Used to create service , using current logged in user id as a creator. |
 | DELETE      | `/service/:id`  | n/a                                             | 200            | 401    |  user and admin `<PrivateRoute>`      | Used to delete one service by id .            |
-## Links
+
+  ## UML
+![UML](./img/UML.png)
+
+  ## Links
 ### Trello
 [Link to your trello board](https://trello.com/mpprojecthaitham) 
 ### Git
@@ -216,11 +222,7 @@ service model
 [Slides Link](https://github.com/MP-Project-Haitham)
 
 
-## UML
-![UML](./img/UML.png)
 
-## ERD
-![ERD](./img/ERD.png)
 
 
 
