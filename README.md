@@ -1,3 +1,5 @@
+
+--------------
 ## Master Paece Project (Name)
 
 (Name):the app focus on traveling and cultural exchange to make it essayer for the Tourists
@@ -24,35 +26,8 @@ and the other users commint on the post to help or even arrange meeting to disco
 
 # Client / Frontend
 
-## React Router Routes (React App)
 
-| Path             | Component            | Permissions                | Behavior                                                     |
-| ---------------- | -------------------- | -------------------------- | ------------------------------------------------------------ |
-| `/`              | homePage             | public `<Route>`           | Home page                                                    |
-| `/signup`        | SignupPage           | public `<Route>`           | Signup form, link to login, navigate to homepage after signup|
-| `/login`         | LoginPage            | public `<Route>`           | Login form, link to signup, navigate to homepage after login |
-| `/posts`         | posts Page           | public `<Route>`           | Shows all posts                                              |
-| `/post/create`   | create post Page     | user only `<PrivateRoute>` | create a post                                                |
-| `/post/:id`      | post Page            | public `<Route>`           | read the post for all , and commint and like for useres, and edit for the owner      |
-| `/meetsup`       | meets up Page        | public `<Route>`           | Shows all meets up                                           |
-| `/meetup/create` | create meetup Page   | user only `<PrivateRoute>` | create a meet up                                             |
-| `/meetup/:id`    | meetup Page          | public `<Route>`           | read the meet up for all , and commint ,like and aplly for useres, and edit for the owner      |
-| `/services`      | services Page        | public `<Route>`           | Shows all services                                           |
-| `/service/create`| create service Page  | user only `<PrivateRoute>` | create a service                                             |
-| `/service/:id`   | service Page         | public `<Route>`           | read the service for all , and commint ,rate  and booking for useres, and edit for the owner      |
-| `/profile/:id`   | service Page         | public `<Route>`           | read for all , and edit for the owner                        |
-
-## Components
-- HomePage
-- PostPage
-- MeetupPage
-- ServicePage
-- LoginPage
-- ProfilePage
-- SignupPage
-- Navbar
-
-# Server / Backend
+# Server 
 
 ## Models
 
@@ -176,21 +151,13 @@ service model
 
 [Slides Link](https://github.com/MP-Project-Haitham)
 
-### Wireframe
-
-Home page
-![Home page](./img/home.png)
-Post page
-![Post page](./img/post_page.png)
-Meetup page
-![Meetup page](./img/meet_up_page.png)
-Service page 
-![Service page](./img/serves_page.png)
 
 ## UML
 ![UML](./img/UML.png)
 
 ## ERD
 ![ERD](./img/ERD.png)
+
+
 
 
