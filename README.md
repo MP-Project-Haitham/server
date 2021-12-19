@@ -83,9 +83,10 @@ Post model
 | creator    |Schema <user>    |   required       | n/a           |
 | like       |Schema <like>    |    n/a           | n/a           |
 | tag        | String          |    n/a           | n/a           |
-| isclose    | Boolean         |                  | false         |
-| isdel      | Boolean         |                  | false         |
-Post Schema
+| isclose    | Boolean         |    n/a           | false         |
+| isdel      | Boolean         |    n/a           | false         |
+
+  Post Schema
 
 ```
  {
@@ -115,8 +116,8 @@ meetup model
 | creator    |Schema <user>    |   required       | n/a           |
 | like       |Schema <like>    |    n/a           | n/a           |
 | tag        | String          |    n/a           | n/a           |
-| isclose    | Boolean         |                  | false         |
-| isdel      | Boolean         |                  | false         |
+| isclose    | Boolean         |    n/a           | false         |
+| isdel      | Boolean         |    n/a           | false         |
   
   
 meetup Schema
@@ -150,8 +151,8 @@ service model
 | creator    |Schema <user>    |   required       | n/a           |
 | raet       |Schema <raet>    |    n/a           | n/a           |
 | tag        | String          |    n/a           | n/a           |
-| isclose    | Boolean         |                  | false         |
-| isdel      | Boolean         |                  | false         |
+| isclose    | Boolean         |    n/a           | false         |
+| isdel      | Boolean         |    n/a           | false         |
   
   service Schema
 
