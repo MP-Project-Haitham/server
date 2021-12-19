@@ -178,12 +178,12 @@ service model
 
 ## Backend routes
 
-| HTTP Method | URL            | Request Body       | Permissions                |                                           | Success status | Error Status | Description                                                  |
-| ----------- | -------------- | -------------------|----------------------------|----------- | -------------- | ------------ | ------------------------------------------------------------ |
-| GET         | `/login/:id`     | n/a                                                          | 200            | 404          | Check if user is logged in and return profile page           |
-| POST        | `/signup` | {username, email, password}                                    | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST        | `/login`  | {email, password}                                         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
-| POST        | `/logout` | n/a                                                      | 204            | 400          | Logs out the user                                            |
+| HTTP Method | URL            | Request Body                                                  | Success status | Error Status  | Permissions                | | Description                                                  |
+| ----------- | -------------- | ---------------------------------------------------------- | -------------- | ------------ | --------------------------------|---------------------------- |
+| GET         | `/login/:id`     | n/a                                                          | 200            | 404          |  | Permissions                |Check if user is logged in and return profile page           |
+| POST        | `/signup` | {username, email, password}                                    | 201            | 404          | | Permissions                | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/login`  | {email, password}                                         | 200            | 401          | | Permissions                | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
+| POST        | `/logout` | n/a                                                      | 204            | 400          | | Permissions                | Logs out the user                                            |
 | GET         | `/post/:id`        | n/a | 200               | 404             |Used to get one post by id . |
 | GET         | `/posts`         | n/a | 200               | 404             |Used to get all posts. |
 | PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400          | Used to update one post by id                 |
