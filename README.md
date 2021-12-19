@@ -50,8 +50,10 @@ User model
 | isdel      | Boolean         |   n/a            | false         |
 | Activate   | Boolean         |   n/a            | false         |
 
- User Schema
-   ```
+
+User Schema
+
+  ```
 {
   username: {type: String, required: true, unique: true},
   email: {type: String, required: true, unique: true},
@@ -67,6 +69,8 @@ User model
   rloe: {type: Schema.Types.ObjectId,ref:'Role'},
   Activate : {type: boolean, default: false},
 }
+```
+
 
 Post model
 | key        | type            | options          | default value |
@@ -178,7 +182,7 @@ service model
 | GET         | `/login/:id`     | n/a                                                          | 200            | 404          | Check if user is logged in and return profile page           |
 | POST        | `/signup` | {username, email, password}                                    | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
 | POST        | `/login`  | {email, password}                                         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
-| POST        | `/logout` | (empty)                                                      | 204            | 400          | Logs out the user                                            |
+| POST        | `/logout` | n/a                                                      | 204            | 400          | Logs out the user                                            |
 | GET         | `/post/:id`        | n/a | 200               | 404             |Used to get one post by id . |
 | GET         | `/posts`         | n/a | 200               | 404             |Used to get all posts. |
 | PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400          | Used to update one post by id                 |
@@ -188,7 +192,7 @@ service model
 | GET         | `/meetsup`        | n/a | 200               | 404             |Used to get all meetup. |
 | PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one meetup by id .          |
 | POST        | `/meetup/creta`| {username, img, titel, post, tag} |                |              | Used to create meetup , using current logged in user id as a creator. |
-| DELETE      | `/meetup/:id`  |                                                              | 200            | 401          | Used to delete one meetup by id .            |
+| DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401          | Used to delete one meetup by id .            |
 | GET         | `/service/:id`  | n/a | 200               | 404             |Used to get one service by id|
 | GET         | `/services`       | n/a | 200               | 404             |Used to get all service. |
 | PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one service by id .          |
