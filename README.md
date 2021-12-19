@@ -184,13 +184,13 @@ service model
 | POST        | `/signup` | {username, email, password}                                    | 201            | 404          |  Permissions                | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
 | POST        | `/login`  | {email, password}                                         | 200            | 401          |  Permissions                | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
 | POST        | `/logout` | n/a                                                      | 204            | 400          |  Permissions                | Logs out the user                                            |
-| GET         | `/post/:id`        | n/a | 200               | 404             |Used to get one post by id . |
-| GET         | `/posts`         | n/a | 200               | 404             |Used to get all posts. |
+| GET         | `/post/:id`        | n/a | 200               | 404   |  Permissions          |Used to get one post by id . |
+| GET         | `/posts`         | n/a | 200               | 404     |  Permissions        |Used to get all posts. |
 | PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400      |  Permissions    | Used to update one post by id                 |
 | POST        | `/post/creta`| {username, img, titel, post, tag} | 201            | 400     |  Permissions    | Used to create post , using current logged in user id as a creator. |
 | DELETE      | `/post/:id`  |  n/a                                                        | 200            | 401    |  Permissions      | Used to delete one post id                 |
-| GET         | `/meetup/:id`   | n/a | 200               | 404             |Used to get one meetup by id|
-| GET         | `/meetsup`        | n/a | 200               | 404             |Used to get all meetup. |
+| GET         | `/meetup/:id`   | n/a | 200               | 404    |  Permissions         |Used to get one meetup by id|
+| GET         | `/meetsup`        | n/a | 200               | 404    |  Permissions         |Used to get all meetup. |
 | PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400   |  Permissions       | Used to update one meetup by id .          |
 | POST        | `/meetup/creta`| {username, img, titel, post, tag} | 201            | 400     |  Permissions    | Used to create meetup , using current logged in user id as a creator. |
 | DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401   |  Permissions       | Used to delete one meetup by id .            |
