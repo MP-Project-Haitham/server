@@ -50,6 +50,23 @@ User model
 | isdel      | Boolean         |   n/a            | false         |
 | Activate   | Boolean         |   n/a            | false         |
 
+ User Schema
+   ```
+{
+  username: {type: String, required: true, unique: true},
+  email: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
+  Phonenumber: {type: Number},
+  HomeTown: {type: String},
+  Sex: {type: String},
+  Avatar : {type: String, required: true, default:},
+  Bio: {type: String},
+  VistedContry: {type: String},
+  isdel: {type: boolean, default: false},
+  isbanned: {type: boolean, default: false},
+  rloe: {type: Schema.Types.ObjectId,ref:'Role'},
+  Activate : {type: boolean, default: false},
+}
 
 Post model
 | key        | type            | options          | default value |
