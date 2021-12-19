@@ -49,6 +49,8 @@ User model
 | isbanned   | Boolean         |   n/a            | false         |
 | isdel      | Boolean         |   n/a            | false         |
 | Activate   | Boolean         |   n/a            | false         |
+
+
 User Schema
 
   ```
