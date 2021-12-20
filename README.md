@@ -1,4 +1,3 @@
-
 --------------
 ## Master Paece Project (Name)
 
@@ -83,9 +82,10 @@ Post model
 | creator    |Schema <user>    |   required       | n/a           |
 | like       |Schema <like>    |    n/a           | n/a           |
 | tag        | String          |    n/a           | n/a           |
-| isclose    | Boolean         |                  | false         |
-| isdel      | Boolean         |                  | false         |
-Post Schema
+| isclose    | Boolean         |    n/a           | false         |
+| isdel      | Boolean         |    n/a           | false         |
+
+  Post Schema
 
 ```
  {
@@ -115,8 +115,8 @@ meetup model
 | creator    |Schema <user>    |   required       | n/a           |
 | like       |Schema <like>    |    n/a           | n/a           |
 | tag        | String          |    n/a           | n/a           |
-| isclose    | Boolean         |                  | false         |
-| isdel      | Boolean         |                  | false         |
+| isclose    | Boolean         |    n/a           | false         |
+| isdel      | Boolean         |    n/a           | false         |
   
   
 meetup Schema
@@ -150,8 +150,8 @@ service model
 | creator    |Schema <user>    |   required       | n/a           |
 | raet       |Schema <raet>    |    n/a           | n/a           |
 | tag        | String          |    n/a           | n/a           |
-| isclose    | Boolean         |                  | false         |
-| isdel      | Boolean         |                  | false         |
+| isclose    | Boolean         |    n/a           | false         |
+| isdel      | Boolean         |    n/a           | false         |
   
   service Schema
 
@@ -173,54 +173,49 @@ service model
    
  }
 ```
+## ERD
+![ERD](./img/ERD.png)
 
 
 ## Backend routes
 
-| HTTP Method | URL            | Request Body                                                 | Success status | Error Status | Description                                                  |
-| ----------- | -------------- | ------------------------------------------------------------ | -------------- | ------------ | ------------------------------------------------------------ |
-| GET         | `/login/:id`     | n/a                                                          | 200            | 404          | Check if user is logged in and return profile page           |
-| POST        | `/signup` | {username, email, password}                                    | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST        | `/login`  | {email, password}                                         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
-| POST        | `/logout` | n/a                                                      | 204            | 400          | Logs out the user                                            |
-| GET         | `/post/:id`        | n/a | 200               | 404             |Used to get one post by id . |
-| GET         | `/posts`         | n/a | 200               | 404             |Used to get all posts. |
-| PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400          | Used to update one post by id                 |
-| POST        | `/post/creta`| {username, img, titel, post, tag} |                |              | Used to create post , using current logged in user id as a creator. |
-| DELETE      | `/post/:id`  |  n/a                                                        | 200            | 401          | Used to delete one post id                 |
-| GET         | `/meetup/:id`   | n/a | 200               | 404             |Used to get one meetup by id|
-| GET         | `/meetsup`        | n/a | 200               | 404             |Used to get all meetup. |
-| PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one meetup by id .          |
-| POST        | `/meetup/creta`| {username, img, titel, post, tag} |                |              | Used to create meetup , using current logged in user id as a creator. |
-| DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401          | Used to delete one meetup by id .            |
-| GET         | `/service/:id`  | n/a | 200               | 404             |Used to get one service by id|
-| GET         | `/services`       | n/a | 200               | 404             |Used to get all service. |
-| PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400          | Used to update one service by id .          |
-| POST        | `/service/creta`| {username, img, titel, post, tag} |                |              | Used to create service , using current logged in user id as a creator. |
-| DELETE      | `/service/:id`  | n/a                                                          | 200            | 401          | Used to delete one service by id .            |
-## Links
+| HTTP Method | URL            | Request Body                                                  | Success status | Error Status  | Permissions                |  Description                                                  |
+| ----------- | -------------- | ---------------------------------------------------------- | -------------- | ------------ | --------------------------------|---------------------------- |
+| GET         | `/login/:id`     | n/a                                                          | 200            | 404          |   public `<Route>`                |Check if user is logged in and return profile page           |
+| POST        | `/signup` | {username, email, password}                                    | 201            | 404          |  public `<Route>`               | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/login`  | {email, password}                                         | 200            | 401          |  public `<Route>`               | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
+| POST        | `/logout` | n/a                                                      | 204            | 400          |  user only `<PrivateRoute>`               | Logs out the user                                            |
+| GET         | `/post/:id`        | n/a | 200               | 404   |  public `<Route>`          |Used to get one post by id . |
+| GET         | `/posts`         | n/a | 200               | 404     |  public `<Route>`        |Used to get all posts. |
+| PUT         | `/post/:id`  | {username, img, titel, post, tag |  201           | 400      |  user only `<PrivateRoute>`    | Used to update one post by id                 |
+| POST        | `/post/creta`| {username, img, titel, post, tag} | 201            | 400     |  user only `<PrivateRoute>`    | Used to create post , using current logged in user id as a creator. |
+| DELETE      | `/post/:id`  |  n/a                                                        | 200            | 401    |  user and admin `<PrivateRoute>`      | Used to delete one post id                 |
+| GET         | `/meetup/:id`   | n/a | 200               | 404    |  public `<Route>`         |Used to get one meetup by id|
+| GET         | `/meetsup`        | n/a | 200               | 404    |  public `<Route>`         |Used to get all meetup. |
+| PUT         | `/meetup/:id`  | {username, img, titel, post, tag,|  201           | 400   |  public `<Route>`       | Used to update one meetup by id .          |
+| POST        | `/meetup/creta`| {username, img, titel, post, tag} | 201            | 400     |  user only `<PrivateRoute>`    | Used to create meetup , using current logged in user id as a creator. |
+| DELETE      | `/meetup/:id`  |  n/a                                                       | 200            | 401   |  user and admin `<PrivateRoute>`       | Used to delete one meetup by id .            |
+| GET         | `/service/:id`  | n/a | 200               | 404      |  public `<Route>`       |Used to get one service by id|
+| GET         | `/services`       | n/a | 200               | 404      |  public `<Route>`       |Used to get all service. |
+| PUT         | `/service/:id`  | {username, img, titel, post, tag,|  201           | 400     |  public `<Route>`     | Used to update one service by id .          |
+| POST        | `/service/creta`| {username, img, titel, post, tag} | 201            | 400     |  user only `<PrivateRoute>`     | Used to create service , using current logged in user id as a creator. |
+| DELETE      | `/service/:id`  | n/a                                             | 200            | 401    |  user and admin `<PrivateRoute>`      | Used to delete one service by id .            |
+
+  ## UML
+![UML](./img/UML.png)
+
+  ## Links
 ### Trello
 [Link to your trello board](https://trello.com/mpprojecthaitham) 
 ### Git
 
 
-[Client repository Link](https://github.com/MP-Project-Haitham/server)
+[Client repository Link](https://github.com/MP-Project-Haitham/client)
 
-[Server repository Link](https://github.com/MP-Project-Haitham/client)
+[Server repository Link](https://github.com/MP-Project-Haitham/server)
 
 [Deployed App Link](https://github.com/MP-Project-Haitham)
 ### Slides
 
 
 [Slides Link](https://github.com/MP-Project-Haitham)
-
-
-## UML
-![UML](./img/UML.png)
-
-## ERD
-![ERD](./img/ERD.png)
-
-
-
-
