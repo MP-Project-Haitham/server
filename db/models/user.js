@@ -16,6 +16,7 @@ const user = new mongoose.Schema({
   state: {type: String, enum: ["Pending", "Active"],default: "Pending"},
   date: { type: String, default: new Date() },
   role: { type: mongoose.Schema.Types.ObjectId, ref: "Role",default:"61c083c56a05555db75af5dd" },
+  active: {type: Boolean,default: false, },
   passwordCode: {type: String},
   activeCode: {type: String},
 
