@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport({
   });
 
   const Register = async (req, res) => {
-    const { email, password, username, avatar, role } = req.body;
+    const { email, password, username } = req.body;
     const lowerEmail = email.toLowerCase();
     console.log(req.token);
     console.log(req);
@@ -34,9 +34,7 @@ const transport = nodemailer.createTransport({
       password: hashPass,
       passwordCode: "",
       username,
-      avatar,
       activeCode,
-      role,
     });
     newUser
       .save()
@@ -147,51 +145,104 @@ const transport = nodemailer.createTransport({
     }
   };
   
-  const login = (req, res) => {
-    const { username, email, password } = req.body;
+//   const login = (req, res) => {
+//     const { username, email, password } = req.body;
   
+//     userModel
+//     //   .findOne({ $or: [{ email }, { username }] })
+//       .findOne({ email })
+//       .then(async (result) => {
+//         if (result) {
+//           console.log(result);
+//         //   if (result.email == email || result.username == username) {
+
+//             if (result.email == email ) {
+//                 // const secret = process.env.SECRETKEY;
+//             const hashedpass = await bcrypt.compare(password, result.password);
+//             console.log(hashedpass);
+//             // console.log(secret);
+//             const payload = {
+//               role: result.role,
+//               id: result._id,
+//               username: result.username,
+//               email: result.email,
+//             };
+//             console.log(payload);
+
+//             console.log(result);
+//             // option = {
+//             //   expiresIn: "6000000m",
+//             // };
+  
+//             // const token = await jwt.sign(payload, secret, option);
+//             // console.log("thistoken",token);
+//             const unhashPassword = await bcrypt.compare(
+//                             password,
+//                             result.password
+//                           );
+//             if (unhashPassword) {
+//               if (result.active == true){
+//               res.status(200)//.json({ result, token });
+//             }else{res.status(400).json("Active your Account");}} else {
+//               res.status(404).json("worng email or password");
+//             }
+//           } else {
+//             res.status(404).json("worng email or password");
+//           }
+//         } else {
+//           res.status(400).json("email does not exist");
+//         }
+//       })
+//       .catch((err) => {
+//         res.status(400).json(err);
+//       });
+//   };
+const login = (req, res) => {
+    const {username,email, password} = req.body;
+    const SECRET_KEY = process.env.SECRET_KEY;
+
+
     userModel
-      .findOne({ $or: [{ email }, { username }] })
-      .then(async (result) => {
-        if (result) {
-          console.log(result);
-          if (result.email == email || result.username == username) {
-            const secret = process.env.SECRETKEY;
-            const hashedpass = await bcrypt.compare(password, result.password);
-            console.log(hashedpass);
-            console.log(secret);
-            const payload = {
-              role: result.role,
-              id: result._id,
-              username: result.username,
-              email: result.email,
-              
+    .findOne({ $or: [{ email }, { username }]})
+  .then(async (result) => {
+    if (result) {
+
+      if ((result.username == username 
+        || result.email == email))
+         {
+          const payload = {
+            role: result.role,
+            id: result._id,
+          };
+
+
+        const savedPassword = await bcrypt.compare
+         (password, result.password);
+        
+        if (savedPassword) {
+          if (result.active == true) {
+            const options = {
+              expiresIn: "60m",
             };
-            console.log(result);
-            option = {
-              expiresIn: "6000000m",
-            };
-  
-            const token = await jwt.sign(payload, secret, option);
-            console.log("thistoken",token);
-            if (hashedpass) {
-              if (result.active == true){
-              res.status(200).json({ result, token });
-            }else{res.status(404).json("Active your Account");}} else {
-              res.status(404).json("worng email or password");
-            }
-          } else {
-            res.status(404).json("worng email or password");
-          }
-        } else {
-          res.status(400).json("email does not exist");
+        let token = jwt.sign(payload, SECRET_KEY, options);
+         
+        res.status(200).json({ result, token });
+      } else { res.status(400).json("please Active your account");} 
+
+      } else {
+          res.status(400).json("wrong name or password");
         }
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  };
-  
+      } else {
+        res.status(400).json("wrong name or password");
+      }
+    } else {
+      res.status(404).json("name not exist");
+    }
+  })
+  .catch((err) => {
+    res.send(err);
+  });
+};
   const getUser = (req, res) => {
     userModel
       .find({})
@@ -204,11 +255,13 @@ const transport = nodemailer.createTransport({
   };
   
   const deletedUser = (req, res) => {
-    // const { id } = req.params;
+    const { id } = req.params;
   
-    console.log(req.token.id);
+    // console.log(req.token.id);
     userModel
-      .findByIdAndUpdate(req.token.id, { isdel: true })
+    //   .findByIdAndUpdate(req.token.id, { isdel: true })
+
+      .findByIdAndUpdate(id, { isdel: true })
       .exec()
       .then((result) => {
         console.log(result);
@@ -220,11 +273,11 @@ const transport = nodemailer.createTransport({
   };
 
   const bannedUser = (req, res) => {
-    // const { id } = req.params;
+    const { id } = req.params;
   
-    console.log(req.token.id);
+    // console.log(req.token.id);
     userModel
-      .findByIdAndUpdate(req.token.id, { isbanned: true })
+      .findByIdAndUpdate(id, { isbanned: true })
       .exec()
       .then((result) => {
         console.log(result);
@@ -234,7 +287,21 @@ const transport = nodemailer.createTransport({
         res.status(400).json(err);
       });
   };
-
+  const unbannedUser = (req, res) => {
+    const { id } = req.params;
+  
+    // console.log(req.token.id);
+    userModel
+      .findByIdAndUpdate(id, { isbanned: false })
+      .exec()
+      .then((result) => {
+        console.log(result);
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  };
 
   const getAllUsers = (req, res) => {
     userModel
@@ -257,5 +324,6 @@ const transport = nodemailer.createTransport({
     resetPassword,
     getAllUsers,
     bannedUser,
+    unbannedUser,
   };
   
