@@ -17,10 +17,6 @@ app.use(userRouter);
 
 
 
-
-
-
-
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`SERVER RUN ON ${PORT}`);

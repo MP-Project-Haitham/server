@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-const message = new mongoose.Schema({
+const cahtRoom = new mongoose.Schema({
 
  
   fromuserId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   touserId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  conteant: { type: String, required: true },
+  message: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message"  }],
   data: { type: Date, default: new Date() },
 });
 
-module.exports = mongoose.model("Message", message);
+module.exports = mongoose.model("CahtRoom", cahtRoom);

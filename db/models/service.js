@@ -7,7 +7,7 @@ const service = new mongoose.Schema({
   price: {type: String},
   isdel: { type: Boolean, default: false},
   isclose: { type: Boolean, default: false},
-  comment:{type: mongoose.Schema.Types.ObjectId, ref: "Comment"},
+  comment:[{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   date: { type: String, default: new Date() },
   tag: {type: String},
   like: {type: mongoose.Schema.Types.ObjectId, ref: "Like"},
