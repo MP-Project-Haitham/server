@@ -7,13 +7,15 @@ require("dotenv").config();
 
 
 
+
 const transport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
       user: process.env.EMAIL,
-      pass: process.env.EMAIL_PASSWORD,
+      pass: process.env.PASS,
     },
   });
+ 
 
   const Register = async (req, res) => {
     const { email, password, username } = req.body;
@@ -58,7 +60,6 @@ const transport = nodemailer.createTransport({
         res.status(400).json(err);
       });
   };
-  
   
   
   const verifyAccount = async (req, res) => {
