@@ -1,17 +1,17 @@
 const meetupModel = require("./../../db/models/meetup");
 // const likeModel = require("./../../db/models/like");
 
-const create = (req, res) => {
+const createMeetup = (req, res) => {
     const {_id} = req.params
-    const {titel,post,img} = req.body;
+    const {titel,desc,img} = req.body;
 
-    const newPost = new postModel({
+    const newMeetup = new meetupModel({
       titel: titel,
-        post: post,
+      desc: desc,
       img:img,
         
     });
-    newPost
+    newMeetup
     .save()
     .then((result) => {
         res.status(201).json(result);
@@ -22,8 +22,8 @@ const create = (req, res) => {
     })
 }
 
-const getPosts = (req, res) => {
-  postModel
+const getMeetsup = (req, res) => {
+    meetupModel
        .find({isdel:false})
       .then((result) => {
         res.send(result);
@@ -32,21 +32,11 @@ const getPosts = (req, res) => {
         res.send(err);
       });
 };
-// const getPost = (req, res) => {
-//   postModel
-//     .find({})
-//     .populate("likeId commentId")
-//     .then((result) => {
-//       res.status(200).json(result);
-//     })
-//     .catch((err) => {
-//       res.status(400).json(err);
-//     });
-// };
-const getPostById = (req, res) => {
+
+const getMeetupById = (req, res) => {
   const { id } = req.params;
   console.log(id);
-  postModel
+  meetupModel
     .findById(id)
     .exec()
     .then((result) => {
@@ -56,11 +46,11 @@ const getPostById = (req, res) => {
       res.status(400).json(err);
     });
 };
-const updateImgPost = (req, res) => {
+const updateImgMeetup = (req, res) => {
   const { id } = req.params;
   const { img } = req.body;
   console.log(id);
-  postModel
+  meetupModel
     .findByIdAndUpdate(id, { img }, { new: true })
     .exec()
     .then((result) => {
@@ -71,12 +61,12 @@ const updateImgPost = (req, res) => {
       res.status(400).json(err);
     });
 };
-const updateDescPost = (req, res) => {
+const updateDescMeetup = (req, res) => {
   const { id } = req.params;
-  const { post , titel} = req.body;
+  const { desc } = req.body;
   console.log(id);
-  postModel
-    .findByIdAndUpdate(id, { $set: { post } },{$set: { titel }}, { new: true })
+  meetupModel
+    .findByIdAndUpdate(id, { $set: { desc } }, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
@@ -86,11 +76,11 @@ const updateDescPost = (req, res) => {
       res.status(400).json(err);
     });
 };
-const updatePostTitel = (req, res) => {
+const updateMeetupTitel = (req, res) => {
   const { id } = req.params;
   const {titel} = req.body;
   console.log(id);
-  postModel
+  meetupModel
     .findByIdAndUpdate(id,{$set: { titel }}, { new: true })
     .exec()
     .then((result) => {
@@ -101,12 +91,12 @@ const updatePostTitel = (req, res) => {
       res.status(400).json(err);
     });
 };
-const deletedPostByUser = (req, res) => {
+const deletedMeetupByUser = (req, res) => {
   const { id } = req.params;
 
   console.log(id);
-  postModel
-    .findByIdAndUpdate(id, { isDelete: true }, { new: true })
+  meetupModel
+    .findByIdAndUpdate(id,{ isdel: true}, {isclose: true}, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
@@ -116,11 +106,11 @@ const deletedPostByUser = (req, res) => {
       res.status(400).json(err);
     });
 };
-const deletedPost = (req, res) => {
+const deletedMeetup = (req, res) => {
   const { id } = req.params;
 
   console.log(id);
-  postModel
+  meetupModel
     .findByIdAndUpdate(id, { isdel: true })
     .exec()
     .then((result) => {
@@ -131,11 +121,11 @@ const deletedPost = (req, res) => {
       res.status(400).json(err);
     });
 };
-const closePost = (req, res) => {
+const closeMeetup = (req, res) => {
   const { id } = req.params;
 
   console.log(id);
-  postModel
+  meetupModel
     .findByIdAndUpdate(id, { isclose: true })
     .exec()
     .then((result) => {
@@ -147,14 +137,13 @@ const closePost = (req, res) => {
     });
   }
 module.exports = {
-  createPost,
-  getPosts,
-  getPostById,
-  updatePostTitel,
-  updateImgPost,
-  updateDescPost,
-  deletedPostByUser,
-  deletedPost,
-  // getPost,
-  closePost,
+  createMeetup,
+  getMeetsup,
+  getMeetupById,
+  updateMeetupTitel,
+  updateImgMeetup,
+  updateDescMeetup,
+  deletedMeetupByUser,
+  deletedMeetup,
+  closeMeetup,
 };

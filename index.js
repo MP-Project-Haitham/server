@@ -17,7 +17,8 @@ app.use(userRouter);
 const postRouter = require('./routers/route/post');
 app.use(postRouter);
 
-
+const meetupRouter = require('./routers/route/meetup');
+app.use(meetupRouter);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
