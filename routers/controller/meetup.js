@@ -3,11 +3,11 @@ const meetupModel = require("./../../db/models/meetup");
 
 const createMeetup = (req, res) => {
     const {_id} = req.params
-    const {titel,does,img} = req.body;
+    const {titel,desc,img} = req.body;
 
     const newMeetup = new meetupModel({
       titel: titel,
-      does: does,
+      desc: desc,
       img:img,
         
     });
@@ -63,10 +63,10 @@ const updateImgMeetup = (req, res) => {
 };
 const updateDescMeetup = (req, res) => {
   const { id } = req.params;
-  const { does , titel} = req.body;
+  const { desc } = req.body;
   console.log(id);
   meetupModel
-    .findByIdAndUpdate(id, { $set: { does } }, { new: true })
+    .findByIdAndUpdate(id, { $set: { desc } }, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
@@ -96,7 +96,7 @@ const deletedMeetupByUser = (req, res) => {
 
   console.log(id);
   meetupModel
-    .findByIdAndUpdate(id, { isdel: true }, { new: true })
+    .findByIdAndUpdate(id,{ isdel: true}, {isclose: true}, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
