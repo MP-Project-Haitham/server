@@ -1,5 +1,7 @@
 const postModel = require("./../../db/models/post");
-// const likeModel = require("./../../db/models/like");
+const commentModel = require("./../../db/models/comment");
+
+const likeModel = require("./../../db/models/like");
 
 const createPost = (req, res) => {
     const {_id} = req.params
@@ -24,7 +26,8 @@ const createPost = (req, res) => {
 
 const getPosts = (req, res) => {
   postModel
-       .find({isdel:false})
+       .find({}).populate("comment","desc -_id").exec()
+
       .then((result) => {
         res.send(result);
       })
@@ -47,7 +50,8 @@ const getPostById = (req, res) => {
   const { id } = req.params;
   console.log(id);
   postModel
-    .findById(id)
+    .findById(id).populate("comment","desc -_id")
+
     .exec()
     .then((result) => {
       res.status(200).json(result);

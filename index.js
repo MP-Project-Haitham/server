@@ -23,6 +23,9 @@ app.use(meetupRouter);
 const serviceRouter = require('./routers/route/service');
 app.use(serviceRouter);
 
+const commentRouter = require('./routers/route/comment');
+app.use(commentRouter);
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`SERVER RUN ON ${PORT}`);

@@ -24,7 +24,7 @@ const createMeetup = (req, res) => {
 
 const getMeetsup = (req, res) => {
     meetupModel
-       .find({isdel:false})
+       .find({isdle:false})
       .then((result) => {
         res.send(result);
       })
@@ -37,7 +37,7 @@ const getMeetupById = (req, res) => {
   const { id } = req.params;
   console.log(id);
   meetupModel
-    .findById(id)
+    .findById(id,{ new: true }).populate("comment","desc -_id")
     .exec()
     .then((result) => {
       res.status(200).json(result);
