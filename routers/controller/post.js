@@ -1,45 +1,48 @@
 const postModel = require("./../../db/models/post");
-const likeModel = require("./../../db/models/like");
+// const likeModel = require("./../../db/models/like");
 
 const createPost = (req, res) => {
-  const { img, userid, post, titel, comment, isdel, date } = req.body;
-  const newPost = new postModel({
-    userid: req.token.id,
-    titel,
-    post,
-    img,
-  });
-  newPost
+    const {_id} = req.params
+    const {titel,post,img} = req.body;
+
+    const newPost = new postModel({
+      titel: titel,
+        post: post,
+      img:img,
+        
+    });
+    newPost
     .save()
     .then((result) => {
-      res.status(201).json(err);
+        res.status(201).json(result);
+
     })
-    .cathch((err) => {
-      res.status(400).json(err);
-    });
-};
+    .catch((err) => {
+        res.status(400).json(err);
+    })
+}
+
 const getPosts = (req, res) => {
   postModel
-    .find({ userid: req.token.id }, { isdel: false }, { new: true })
-    .populate("like comment", "post img")
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
+       .find({isdel:false})
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
 };
-const getPost = (req, res) => {
-  postModel
-    .find({})
-    .populate("likeId commentId")
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-};
+// const getPost = (req, res) => {
+//   postModel
+//     .find({})
+//     .populate("likeId commentId")
+//     .then((result) => {
+//       res.status(200).json(result);
+//     })
+//     .catch((err) => {
+//       res.status(400).json(err);
+//     });
+// };
 const getPostById = (req, res) => {
   const { id } = req.params;
   console.log(id);
@@ -70,10 +73,25 @@ const updateImgPost = (req, res) => {
 };
 const updateDescPost = (req, res) => {
   const { id } = req.params;
-  const { desc } = req.body;
+  const { post , titel} = req.body;
   console.log(id);
   postModel
-    .findByIdAndUpdate(id, { $set: { desc } }, { new: true })
+    .findByIdAndUpdate(id, { $set: { post } },{$set: { titel }}, { new: true })
+    .exec()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+const updatePostTitel = (req, res) => {
+  const { id } = req.params;
+  const {titel} = req.body;
+  console.log(id);
+  postModel
+    .findByIdAndUpdate(id,{$set: { titel }}, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
@@ -103,7 +121,7 @@ const deletedPost = (req, res) => {
 
   console.log(id);
   postModel
-    .findByIdAndUpdate(id, { isDelete: true }, { new: true })
+    .findByIdAndUpdate(id, { isdel: true })
     .exec()
     .then((result) => {
       console.log(result);
@@ -113,13 +131,30 @@ const deletedPost = (req, res) => {
       res.status(400).json(err);
     });
 };
+const closePost = (req, res) => {
+  const { id } = req.params;
+
+  console.log(id);
+  postModel
+    .findByIdAndUpdate(id, { isclose: true })
+    .exec()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+  }
 module.exports = {
   createPost,
   getPosts,
   getPostById,
+  updatePostTitel,
   updateImgPost,
   updateDescPost,
   deletedPostByUser,
   deletedPost,
-  getPost,
+  // getPost,
+  closePost,
 };
