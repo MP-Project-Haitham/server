@@ -1,7 +1,7 @@
-const postModel = require("./../../db/models/post");
+const meetupModel = require("./../../db/models/meetup");
 // const likeModel = require("./../../db/models/like");
 
-const createPost = (req, res) => {
+const create = (req, res) => {
     const {_id} = req.params
     const {titel,post,img} = req.body;
 
