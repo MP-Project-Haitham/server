@@ -96,7 +96,7 @@ const deletedMeetupByUser = (req, res) => {
 
   console.log(id);
   meetupModel
-    .findByIdAndUpdate(id,{ isdel: true}, {isclose: true}, { new: true })
+    .findByIdAndUpdate(id,{ isdel: true}, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
