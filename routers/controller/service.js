@@ -30,17 +30,7 @@ const getServices = (req, res) => {
           res.send(err);
         });
   };
-  // const getServices = (req, res) => {
-  //   serviceModel
-  //     .find({})
-  //     .populate("likeId commentId")
-  //     .then((result) => {
-  //       res.status(200).json(result);
-  //     })
-  //     .catch((err) => {
-  //       res.status(400).json(err);
-  //     });
-  // };
+ 
   const getServiceById = (req, res) => {
     const { id } = req.params;
     console.log(id);

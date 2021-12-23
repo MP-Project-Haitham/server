@@ -9,7 +9,7 @@ const meetup = new mongoose.Schema({
   comment:[{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   date: { type: String, default: new Date() },
   tag: {type: String},
-  like: {type: mongoose.Schema.Types.ObjectId, ref: "Like"},
+  like: [{type: mongoose.Schema.Types.ObjectId, ref: "Like"}],
 
 });
 
