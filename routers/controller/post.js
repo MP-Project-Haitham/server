@@ -76,7 +76,7 @@ const updateDescPost = (req, res) => {
   const { post , titel} = req.body;
   console.log(id);
   postModel
-    .findByIdAndUpdate(id, { $set: { post } },{$set: { titel }}, { new: true })
+    .findByIdAndUpdate(id, { $set: { post } }, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
@@ -106,7 +106,7 @@ const deletedPostByUser = (req, res) => {
 
   console.log(id);
   postModel
-    .findByIdAndUpdate(id, { isDelete: true }, { new: true })
+    .findByIdAndUpdate(id, { isdel: true }, { new: true })
     .exec()
     .then((result) => {
       console.log(result);
