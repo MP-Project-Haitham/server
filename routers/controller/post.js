@@ -1,13 +1,14 @@
 const postModel = require("./../../db/models/post");
 const commentModel = require("./../../db/models/comment");
-
 const likeModel = require("./../../db/models/like");
+
 
 const createPost = (req, res) => {
     const {_id} = req.params
-    const {titel,post,img} = req.body;
+    const {titel,userid,post,img} = req.body;
 
     const newPost = new postModel({
+      userid:req.token.id,
       titel: titel,
         post: post,
       img:img,

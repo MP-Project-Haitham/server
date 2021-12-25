@@ -8,26 +8,21 @@ const {
   updateDescPost,
   deletedPostByUser,
   deletedPost,
-//   getPost,
   closePost
 } = require("./../controller/post");
-// const { authentication } = require("./../middleware/authentication");
-// const { authorization } = require("./../middleware/authorization");
+const { authentication } = require("./../middleware/authentication");
+const { authorization } = require("./../middleware/authorization");
 const postRouter = express.Router();
 
-postRouter.post("/newPost", createPost);
-// postRouter.post("/like",authentication, like);
+postRouter.post("/newPost",authentication, createPost);
 postRouter.get("/posts", getPosts);
 postRouter.get("/post/:id", getPostById);
-// postRouter.get("/post", getPost);
-postRouter.delete("/deletebyuser/:id", deletedPostByUser);
+postRouter.delete("/deletebyuser/:id",authentication,authorization, deletedPostByUser);
 //admin
-postRouter.put( "/updateposttitel/:id" ,updatePostTitel);
-postRouter.put("/updateimg/:id", updateImgPost);
-postRouter.put( "/updatepost/:id" ,updateDescPost);
-postRouter.put( "/closepost/:id" ,closePost);
-
-
-postRouter.delete("/delete/:id", deletedPost);
+postRouter.put( "/updateposttitel/:id",authentication ,updatePostTitel);
+postRouter.put("/updateimg/:id",authentication,authorization ,updateImgPost);
+postRouter.put( "/updatepost/:id",authentication ,authorization,updateDescPost);
+postRouter.put( "/closepost/:id",authentication ,authorization,closePost);
+postRouter.delete("/delete/:id",authentication,authorization, deletedPost);
 
 module.exports = postRouter;

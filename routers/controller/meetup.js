@@ -1,11 +1,12 @@
 const meetupModel = require("./../../db/models/meetup");
-// const likeModel = require("./../../db/models/like");
-
+const likeModel = require("./../../db/models/like");
+const commentModel = require("./../../db/models/comment");
 const createMeetup = (req, res) => {
     const {_id} = req.params
-    const {titel,desc,img} = req.body;
+    const {titel,desc,img,userid} = req.body;
 
     const newMeetup = new meetupModel({
+      userid:req.token.id,
       titel: titel,
       desc: desc,
       img:img,
