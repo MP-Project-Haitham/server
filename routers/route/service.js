@@ -11,23 +11,21 @@ const {
     closeService
 
 } = require("./../controller/service");
-// const { authentication } = require("./../middleware/authentication");
-// const { authorization } = require("./../middleware/authorization");
+const { authentication } = require("./../middleware/authentication");
+const { authorization } = require("./../middleware/authorization");
 const serviceRouter = express.Router();
 
-serviceRouter.post("/newservice", createservice);
-// meetupRouter.post("/like",authentication, like);
+serviceRouter.post("/newservice",authentication, createservice);
 serviceRouter.get("/service", getServices);
 serviceRouter.get("/service/:id", getServiceById);
-// meetupRouter.get("/post", getPost);
-serviceRouter.delete("/deleteservice/:id", deletedServiceByUser);
+serviceRouter.delete("/deleteservice/:id",authentication,authorization, deletedServiceByUser);
 //admin
-serviceRouter.put( "/updateservicetitel/:id" ,updateServiceTitel);
-serviceRouter.put("/updateserviceimg/:id", updateImgService);
-serviceRouter.put( "/updateserviceDesc/:id" ,updateDescService);
-serviceRouter.put( "/closeservice/:id" ,closeService);
+serviceRouter.put( "/updateservicetitel/:id" ,authentication,authorization,updateServiceTitel);
+serviceRouter.put("/updateserviceimg/:id",authentication,authorization, updateImgService);
+serviceRouter.put( "/updateserviceDesc/:id" ,authentication,authorization,updateDescService);
+serviceRouter.put( "/closeservice/:id" ,authentication,authorization,closeService);
 
 
-serviceRouter.delete("/deleteser/:id", deletedService);
+serviceRouter.delete("/deleteser/:id",authentication,authorization, deletedService);
 
 module.exports = serviceRouter;

@@ -1,24 +1,19 @@
 const express = require("express");
 const {
-createComment,
-  getComment,
-  createCommentMeetup,
-  updateComment,
-  deletedComment,
-  createCommentService,
-} = require("./../controller/comment");
-// const { authentication } = require("./../middleware/authentication"); 
-// const { authorization } = require("./../middleware/authorization");
+  createLike,
+  createLikeMeetup,
+createLikeMeetup,
+createLikeService,
+deleteLike,} = require("./../controller/like");
+const { authentication } = require("./../middleware/authentication"); 
+const { authorization } = require("./../middleware/authorization");
 
 const commentRouter = express.Router();
-commentRouter.post("/newcomment", createLike);
-commentRouter.get("/comments", getComment);
-commentRouter.post("/newcommentmeetup", createCommentMeetup);
-commentRouter.post("/newcommentservice", createCommentMeetup);
+commentRouter.post("/newcomment",authentication, createLike);
+commentRouter.post("/newlikemeetup",authentication, createLikeMeetup);
+commentRouter.post("/newlikeservice",authentication, createLikeService);
 
-//admin
-commentRouter.put("/updatecomment/:id",updateComment);
 commentRouter.delete(
-  "/delcomment/:id",deletedComment);
+  "/dellike/:id",deleteLike);
 
 module.exports = commentRouter;

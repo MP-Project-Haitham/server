@@ -7,10 +7,11 @@ const serviceModel = require("./../../db/models/service");
 const createLike = (req, res) => {
     console.log(req.token);
   const { userId,postId } = req.body;
-  const newComent = new likeModel({
+  const newlike = new likeModel({
+    userId:req.token.id,
     postId,
 });
-  newLike
+  newlike
     .save()
     .then((result) => {
         postModel
@@ -24,18 +25,18 @@ const createLike = (req, res) => {
       res.status(400).json(err);
     });
 };
-const createCommentMeetup = (req, res) => {
+const createLikeMeetup = (req, res) => {
     console.log(req.token);
-  const { userId, desc,meetupId } = req.body;
-  const newComent = new commentModel({
-    desc,
+  const { userId,meetupId } = req.body;
+  const newlike = new commentModel({
+    userId:req.token.id,
     meetupId,
 });
-  newComent
+  newlike
     .save()
     .then((result) => {
         meetupModel
-        .findByIdAndUpdate(meetupId, { $push : {comment: result._id}})
+        .findByIdAndUpdate(meetupId, { $push : {like: result._id}})
         .then((result)=>{
             res.status(201).json(result);
         })
@@ -45,14 +46,14 @@ const createCommentMeetup = (req, res) => {
       res.status(400).json(err);
     });
 };
-const createCommentService = (req, res) => {
+const createLikeService = (req, res) => {
     console.log(req.token);
-  const { userId, desc,serviceId } = req.body;
+  const { userId,serviceId } = req.body;
   const newComent = new commentModel({
-    desc,
+    userId:req.token.id,
     serviceId,
 });
-  newComent
+  newLike
     .save()
     .then((result) => {
         serviceModel
@@ -68,44 +69,15 @@ const createCommentService = (req, res) => {
 };
 
 
-const getComment = (req, res) => {
-  commentModel
-    .find({userId: req.token.id, isdel: false }).populate("postId","post -_id")
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-};
 
-const updateComment = (req, res) => {
+
+const deleteLike = (req, res) => {
   const { id } = req.params;
-  const { desc } = req.body;
-
-  console.log(id);
-  commentModel
-    .findByIdAndUpdate(id, { $set: { desc } }, { new: true })
-    .exec() 
-    .then((result) => {
-      console.log(result);
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-};
-
-const deletedComment = (req, res) => {
-  const { id } = req.params;
-
-  console.log(id);
-  commentModel
-    .findByIdAndRemove(id, { new: true })
+  likeModel
+    .findByIdAndRemove(id , req.token.id)
     .exec()
     .then((result) => {
-      console.log(result);
-      res.status(200).json(result);
+      res.status(200).json("dislike");
     })
     .catch((err) => {
       res.status(400).json(err);
@@ -114,9 +86,8 @@ const deletedComment = (req, res) => {
 
 module.exports = {
     createLike,
-  getComment,
-  createCommentMeetup,
-  createCommentService,
-  updateComment,
-  deletedComment,
+    createLikeMeetup,
+  createLikeMeetup,
+  createLikeService,
+  deleteLike,
 };

@@ -146,58 +146,58 @@ const transport = nodemailer.createTransport({
     }
   };
   
-//   const login = (req, res) => {
-//     const { username, email, password } = req.body;
+  // const login = (req, res) => {
+  //   const { username, email, password } = req.body;
   
-//     userModel
-//     //   .findOne({ $or: [{ email }, { username }] })
-//       .findOne({ email })
-//       .then(async (result) => {
-//         if (result) {
-//           console.log(result);
-//         //   if (result.email == email || result.username == username) {
+  //   userModel
+  //   //   .findOne({ $or: [{ email }, { username }] })
+  //     .findOne({ email })
+  //     .then(async (result) => {
+  //       if (result) {
+  //         console.log(result);
+  //       //   if (result.email == email || result.username == username) {
 
-//             if (result.email == email ) {
-//                 // const secret = process.env.SECRETKEY;
-//             const hashedpass = await bcrypt.compare(password, result.password);
-//             console.log(hashedpass);
-//             // console.log(secret);
-//             const payload = {
-//               role: result.role,
-//               id: result._id,
-//               username: result.username,
-//               email: result.email,
-//             };
-//             console.log(payload);
+  //           if (result.email == email ) {
+  //               // const secret = process.env.SECRETKEY;
+  //           const hashedpass = await bcrypt.compare(password, result.password);
+  //           console.log(hashedpass);
+  //           // console.log(secret);
+  //           const payload = {
+  //             role: result.role,
+  //             id: result._id,
+  //             username: result.username,
+  //             email: result.email,
+  //           };
+  //           console.log(payload);
 
-//             console.log(result);
-//             // option = {
-//             //   expiresIn: "6000000m",
-//             // };
+  //           console.log(result);
+  //           option = {
+  //             expiresIn: "6000000m",
+  //           };
   
-//             // const token = await jwt.sign(payload, secret, option);
-//             // console.log("thistoken",token);
-//             const unhashPassword = await bcrypt.compare(
-//                             password,
-//                             result.password
-//                           );
-//             if (unhashPassword) {
-//               if (result.active == true){
-//               res.status(200)//.json({ result, token });
-//             }else{res.status(400).json("Active your Account");}} else {
-//               res.status(404).json("worng email or password");
-//             }
-//           } else {
-//             res.status(404).json("worng email or password");
-//           }
-//         } else {
-//           res.status(400).json("email does not exist");
-//         }
-//       })
-//       .catch((err) => {
-//         res.status(400).json(err);
-//       });
-//   };
+  //           const token = await jwt.sign(payload, secret, option);
+  //           console.log("thistoken",token);
+  //           const unhashPassword = await bcrypt.compare(
+  //                           password,
+  //                           result.password
+  //                         );
+  //           if (unhashPassword) {
+  //             if (result.active == true){
+  //             res.status(200)//.json({ result, token });
+  //           }else{res.status(400).json("Active your Account");}} else {
+  //             res.status(404).json("worng email or password");
+  //           }
+  //         } else {
+  //           res.status(404).json("worng email or password");
+  //         }
+  //       } else {
+  //         res.status(400).json("email does not exist");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       res.status(400).json(err);
+  //     });
+  // };
 const login = (req, res) => {
     const {username,email, password} = req.body;
     const SECRET_KEY = process.env.SECRET_KEY;
@@ -223,7 +223,7 @@ const login = (req, res) => {
         if (savedPassword) {
           if (result.active == true) {
             const options = {
-              expiresIn: "60m",
+              expiresIn: "6000m",
             };
         let token = jwt.sign(payload, SECRET_KEY, options);
          
