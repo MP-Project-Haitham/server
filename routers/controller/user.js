@@ -47,10 +47,10 @@ const transport = nodemailer.createTransport({
               to: lowerEmail,
               subject: "Please confirm your account",
               html: `<h1>Email Confirmation</h1>
-                <h2>Hello ${result.userName}</h2>
+                <h2>Hello ${result.username}</h2>
                 <h4>CODE: ${activeCode}</h4>
                 <p>Thank you for registering. Please confirm your email by entring the code on the following link</p>
-                <a href=https://social-media-project-frontend.herokuapp.com/verify_account/${result._id}> Click here</a>
+                <a href=http://localhost:3000/Account/${result._id}> Click here</a>
                 </div>`,
             })
             .catch((err) => console.log(err));
@@ -107,7 +107,7 @@ const transport = nodemailer.createTransport({
                 <h2>Hello ${result.username}</h2>
                 <h4>CODE: ${passwordCode}</h4>
                 <p>Please enter the code on the following link and reset your password</p>
-                <a href=https://social-media-project-frontend.herokuapp.com/reset_password/${result._id}> Click here</a>
+                <a href=http://localhost:3000/ResetPass/${result._id}> Click here</a>
                 </div>`,
             })
             .catch((err) => console.log(err));
