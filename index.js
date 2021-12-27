@@ -26,6 +26,13 @@ app.use(serviceRouter);
 const commentRouter = require('./routers/route/comment');
 app.use(commentRouter);
 
+
+const likeRouter = require('./routers/route/like');
+app.use(likeRouter);
+
+const followRouter = require('./routers/route/follow');
+app.use(followRouter);
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`SERVER RUN ON ${PORT}`);
