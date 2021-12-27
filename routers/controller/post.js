@@ -4,15 +4,16 @@ const likeModel = require("./../../db/models/like");
 
 
 const createPost = (req, res) => {
-    const {_id} = req.params
-    const {titel,userid,post,img} = req.body;
+  // console.log("fffff  "+req.token.id);
 
+    const {titel,userId,post,img} = req.body;
     const newPost = new postModel({
-      userid:req.token.id,
+     
+      userId: req.token.id,
       titel: titel,
         post: post,
       img:img,
-        
+
     });
     newPost
     .save()
@@ -27,7 +28,8 @@ const createPost = (req, res) => {
 
 const getPosts = (req, res) => {
   postModel
-       .find({}).populate("comment","desc -_id").exec()
+       .find({isdel: false }, { new: true })
+       .populate("comment","desc -_id").exec()
 
       .then((result) => {
         res.send(result);

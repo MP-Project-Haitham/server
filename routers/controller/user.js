@@ -20,8 +20,8 @@ const transport = nodemailer.createTransport({
   const Register = async (req, res) => {
     const { email, password, username } = req.body;
     const lowerEmail = email.toLowerCase();
-    console.log(req.token);
-    console.log(req);
+    // console.log("hereeeeeeeeeeeeeeeee "+req.token);
+    // console.log(req);
     const hashPass = await bcrypt.hash(password, SALT);
     let activeCode = "";
     const characters = "0123456789";
@@ -146,104 +146,99 @@ const transport = nodemailer.createTransport({
     }
   };
   
-  // const login = (req, res) => {
-  //   const { username, email, password } = req.body;
+  const login = (req, res) => {
+    const { username, email, password } = req.body;
   
-  //   userModel
-  //   //   .findOne({ $or: [{ email }, { username }] })
-  //     .findOne({ email })
-  //     .then(async (result) => {
-  //       if (result) {
-  //         console.log(result);
-  //       //   if (result.email == email || result.username == username) {
-
-  //           if (result.email == email ) {
-  //               // const secret = process.env.SECRETKEY;
-  //           const hashedpass = await bcrypt.compare(password, result.password);
-  //           console.log(hashedpass);
-  //           // console.log(secret);
-  //           const payload = {
-  //             role: result.role,
-  //             id: result._id,
-  //             username: result.username,
-  //             email: result.email,
-  //           };
-  //           console.log(payload);
-
-  //           console.log(result);
-  //           option = {
-  //             expiresIn: "6000000m",
-  //           };
-  
-  //           const token = await jwt.sign(payload, secret, option);
-  //           console.log("thistoken",token);
-  //           const unhashPassword = await bcrypt.compare(
-  //                           password,
-  //                           result.password
-  //                         );
-  //           if (unhashPassword) {
-  //             if (result.active == true){
-  //             res.status(200)//.json({ result, token });
-  //           }else{res.status(400).json("Active your Account");}} else {
-  //             res.status(404).json("worng email or password");
-  //           }
-  //         } else {
-  //           res.status(404).json("worng email or password");
-  //         }
-  //       } else {
-  //         res.status(400).json("email does not exist");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       res.status(400).json(err);
-  //     });
-  // };
-const login = (req, res) => {
-    const {username,email, password} = req.body;
-    const SECRET_KEY = process.env.SECRET_KEY;
-
-
     userModel
-    .findOne({ $or: [{ email }, { username }]})
-  .then(async (result) => {
-    if (result) {
-
-      if ((result.username == username 
-        || result.email == email))
-         {
-          const payload = {
-            role: result.role,
-            id: result._id,
-          };
-
-
-        const savedPassword = await bcrypt.compare
-         (password, result.password);
-        
-        if (savedPassword) {
-          if (result.active == true) {
-            const options = {
-              expiresIn: "6000m",
+      .findOne({ $or: [{ email }, { username }] })
+      .then(async (result) => {
+        if (result) {
+          //   console.log(result);
+          if (result.email == email || result.username == username) {
+            const SECRET_KEY = process.env.SECRET_KEY;
+            const hashedpass = await bcrypt.compare(password, result.password);
+            // console.log(hashedpass);
+            // console.log(secret);
+            const payload = {
+              role: result.role,
+              id: result._id,
+              username: result.username,
+              email: result.email,
             };
-        let token = jwt.sign(payload, SECRET_KEY, options);
-         
-        res.status(200).json({ result, token });
-      } else { res.status(400).json("please Active your account");} 
-
-      } else {
-          res.status(400).json("wrong name or password");
+            // console.log(result);
+            option = {
+              expiresIn: "6000000m",
+            };
+  
+            const token = await jwt.sign(payload, SECRET_KEY, option);
+            // console.log("thistoken",token);
+            if (hashedpass) {
+              if (result.active == true) {
+                res.status(200).json({ result, token });
+              } else {
+                res.status(404).json("Active your Account");
+              }
+            } else {
+              res.status(404).json("worng email or password");
+            }
+          } else {
+            res.status(404).json("worng email or password");
+          }
+        } else {
+          res.status(400).json("email or UserName does not exist");
         }
-      } else {
-        res.status(400).json("wrong name or password");
-      }
-    } else {
-      res.status(404).json("name not exist");
-    }
-  })
-  .catch((err) => {
-    res.send(err);
-  });
-};
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  };
+// const login = (req, res) => {
+//     const {username,email, password} = req.body;
+
+
+//     userModel
+//     .findOne({ $or: [{ email }, { username }]})
+//   .then(async (result) => {
+//     if (result) {
+
+//       if ((result.username == username 
+//         || result.email == email))
+//          {
+//           const SECRET_KEY = process.env.SECRET_KEY;
+
+//           const payload = {
+//             role: result.role,
+//             id: result._id,
+//           };
+
+
+//         const savedPassword = await bcrypt.compare
+//          (password, result.password);
+        
+//         if (savedPassword) {
+//           if (result.active == true) {
+//             const options = {
+//               expiresIn: "6000m",
+//             };
+//         const  token = await jwt.sign(payload, SECRET_KEY, options);
+         
+//         res.status(200).json({ result, token });
+//       } else { res.status(400).json("please Active your account");} 
+
+//       } else {
+//           res.status(400).json("wrong name or password");
+//         }
+//       } else {
+//         res.status(400).json("wrong name or password");
+//       }
+//     } else {
+//       res.status(404).json("name not exist");
+//     }
+//   })
+//   .catch((err) => {
+//     res.send(err);
+//   });
+// };
   const getUser = (req, res) => {
     userModel
       .find({})
