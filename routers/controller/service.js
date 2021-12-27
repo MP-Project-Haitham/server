@@ -2,10 +2,10 @@ const serviceModel = require("./../../db/models/service");
 
 const createservice = (req, res) => {
     const {_id} = req.params
-    const {titel,desc,img,userid} = req.body;
+    const {titel,desc,img,userId} = req.body;
 
     const newservice = new serviceModel({
-      userid:req.token.id,
+      userId:req.token.id,
       titel: titel,
         desc: desc,
       img:img,
