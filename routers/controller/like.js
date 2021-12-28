@@ -15,7 +15,7 @@ const createLike = (req, res) => {
     .save()
     .then((result) => {
         postModel
-        .findByIdAndUpdate(postId, { $push : {like: result._id}})
+        .findByIdAndUpdate(postId, { $push : {like: result._id}},{ upsert: true })
         .then((result)=>{
             res.status(201).json(result);
         })

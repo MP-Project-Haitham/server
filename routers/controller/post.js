@@ -29,7 +29,8 @@ const createPost = (req, res) => {
 const getPosts = (req, res) => {
   postModel
        .find({isdel: false }, { new: true })
-       .populate("comment","desc -_id").exec()
+       .populate("comment","desc -_id")
+       .populate("like").exec()
 
       .then((result) => {
         res.send(result);
@@ -53,7 +54,9 @@ const getPostById = (req, res) => {
   const { id } = req.params;
   console.log(id);
   postModel
-    .findById(id).populate("comment","desc -_id")
+    .findById(id)
+    .populate("comment","desc -_id")
+    .populate("like")
 
     .exec()
     .then((result) => {
