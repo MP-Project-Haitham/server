@@ -13,9 +13,11 @@ const createLike = (req, res) => {
 });
   newlike
     .save()
+    .populate("userId")
     .then((result) => {
         postModel
         .findByIdAndUpdate(postId, { $push : {like: result._id}},{ upsert: true })
+        
         .then((result)=>{
             res.status(201).json(result);
         })
@@ -83,6 +85,20 @@ const deleteLike = (req, res) => {
       res.status(400).json(err);
     });
 };
+const getLikeById = (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  likeModel
+    .findById(id)
+    .populate("userId")
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
 
 module.exports = {
     createLike,
@@ -90,4 +106,5 @@ module.exports = {
   createLikeMeetup,
   createLikeService,
   deleteLike,
+  getLikeById,
 };

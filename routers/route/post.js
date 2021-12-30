@@ -20,9 +20,9 @@ postRouter.get("/post/:id", getPostById);
 postRouter.delete("/deletebyuser/:id",authentication,authorization, deletedPostByUser);
 //admin
 postRouter.put( "/updateposttitel/:id",authentication ,updatePostTitel);
-postRouter.put("/updateimg/:id",authentication,authorization ,updateImgPost);
-postRouter.put( "/updatepost/:id",authentication ,authorization,updateDescPost);
-postRouter.put( "/closepost/:id",authentication ,authorization,closePost);
-postRouter.delete("/delete/:id",authentication,authorization, deletedPost);
+postRouter.put("/updateimg/:id",authentication ,updateImgPost);
+postRouter.put( "/updatepost/:id",authentication ,updateDescPost);
+postRouter.put( "/closepost/:id",authentication ,closePost);
+postRouter.delete("/delete/:id",authentication, deletedPost);
 
 module.exports = postRouter;
