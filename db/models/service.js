@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const service = new mongoose.Schema({
   img:{type:String },
-  userid: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  userId:[ { type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   titel: { type: String,required: true, unique: true },
   desc: { type: String, required: true },
   price: {type: String},

@@ -20,7 +20,7 @@ const {
 // const { authorization } = require("./../middleware/authorization");
 
 const userRouter = express.Router();
-userRouter.post("/signUp", Register);
+userRouter.post("/signup", Register);
 userRouter.post("/login", login);
 userRouter.post("/verify_account", verifyAccount);
 userRouter.post("/email_check", checkEmail);

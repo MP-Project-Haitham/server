@@ -23,7 +23,10 @@ const createservice = (req, res) => {
 }
 const getServices = (req, res) => {
     serviceModel
-         .find({isdel:false}).populate("comment","desc -_id")
+         .find({isdel:false})
+         .populate("comment","desc -_id")
+         .populate("like")
+         .populate("userId","username  avatar -_id")
         .then((result) => {
           res.send(result);
         })
@@ -36,8 +39,11 @@ const getServices = (req, res) => {
     const { id } = req.params;
     console.log(id);
     serviceModel
-      .findById(id).populate("comment","desc -_id")
-      .exec()
+      .findById(id)
+      .populate("comment","desc -_id")
+      .populate("like")
+      .populate("userId","username  avatar -_id")
+      
       .then((result) => {
         res.status(200).json(result);
       })

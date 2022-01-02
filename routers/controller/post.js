@@ -31,7 +31,7 @@ const getPosts = (req, res) => {
        .find({isdel: false })
        .populate("comment","desc -_id")
        .populate("like")
-       .populate("userId","username-_id")
+       .populate("userId","username  avatar -_id")
 
       .exec()
 
@@ -60,6 +60,7 @@ const getPostById = (req, res) => {
     .findById(id)
     .populate("comment","desc userId -_id")
     .populate("like")
+    .populate("userId","username avatar -_id")
 
     .exec()
     .then((result) => {

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const meetup = new mongoose.Schema({
   img:{ type:String,default: "" },
-  userid: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  userId:[ { type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   titel: { type: String,required: true, unique: true },
   desc: { type: String, required: true },
   isdel: { type: Boolean, default: false},
