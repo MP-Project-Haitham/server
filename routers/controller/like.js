@@ -5,7 +5,6 @@ const serviceModel = require("./../../db/models/service");
 
 
 const createLike = (req, res) => {
-    console.log(req.token);
   const { userId,postId } = req.body;
   const newlike = new likeModel({
     userId:req.token.id,

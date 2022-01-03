@@ -26,6 +26,10 @@ const createMeetup = (req, res) => {
 const getMeetsup = (req, res) => {
     meetupModel
        .find({isdle:false})
+       .populate("comment","desc -_id")
+       .populate("like")
+       .populate("userId","username  avatar -_id")
+
       .then((result) => {
         res.send(result);
       })
@@ -38,8 +42,10 @@ const getMeetupById = (req, res) => {
   const { id } = req.params;
   console.log(id);
   meetupModel
-    .findById(id,{ new: true }).populate("comment","desc -_id")
-    .exec()
+    .findById(id) 
+    .populate("comment","desc -_id")
+    .populate("like")
+    .populate("userId","username  avatar -_id")
     .then((result) => {
       res.status(200).json(result);
     })

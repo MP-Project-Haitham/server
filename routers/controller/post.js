@@ -4,7 +4,6 @@ const likeModel = require("./../../db/models/like");
 
 
 const createPost = (req, res) => {
-  // console.log("fffff  "+req.token.id);
 
     const {titel,userId,post,img} = req.body;
     const newPost = new postModel({
@@ -29,11 +28,10 @@ const createPost = (req, res) => {
 const getPosts = (req, res) => {
   postModel
        .find({isdel: false })
-       .populate("comment","desc -_id")
+       .populate("comment")
        .populate("like")
        .populate("userId","username  avatar -_id")
 
-      .exec()
 
       .then((result) => {
         res.send(result);
@@ -58,11 +56,10 @@ const getPostById = (req, res) => {
   console.log(id);
   postModel
     .findById(id)
-    .populate("comment","desc userId -_id")
+    .populate("comment")
     .populate("like")
     .populate("userId","username avatar -_id")
 
-    .exec()
     .then((result) => {
       res.status(200).json(result);
     })

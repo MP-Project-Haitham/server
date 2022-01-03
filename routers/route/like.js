@@ -12,8 +12,8 @@ const likeRouter = express.Router();
 likeRouter.post("/newlike",authentication, createLike);
 likeRouter.post("/newlikemeetup",authentication, createLikeMeetup);
 likeRouter.post("/newlikeservice",authentication, createLikeService);
-likeRouter.get("/like/:id",authentication, getLikeById);
+likeRouter.get("/like/:id", getLikeById);
 likeRouter.delete(
-  "/dellike/:id",deleteLike);
+  "/dellike/:id",authentication,deleteLike);
 
 module.exports = likeRouter;

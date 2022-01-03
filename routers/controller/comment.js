@@ -5,9 +5,9 @@ const serviceModel = require("./../../db/models/service");
 
 
 const createComment = (req, res) => {
-    console.log(req.token);
   const { userId, desc,postId } = req.body;
   const newComent = new commentModel({
+    userId: req.token.id,
     desc,
     postId,
 });
@@ -70,8 +70,10 @@ const createCommentService = (req, res) => {
 
 
 const getComment = (req, res) => {
+  const id = req.params.id
   commentModel
-    .find({userId: req.token.id, isdel: false }).populate("postId","post -_id")
+    .find({postId:id})
+    .populate("postId userId")
     .then((result) => {
       res.status(200).json(result);
     })
