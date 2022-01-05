@@ -1,4 +1,4 @@
-![logo](./img/TRAVELING ROAD.png)
+![logo](img/logo.png)
 --------------
 ## Master Paece Project (TRAVELING ROAD)
 
