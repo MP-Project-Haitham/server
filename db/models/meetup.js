@@ -10,6 +10,8 @@ const meetup = new mongoose.Schema({
   date: { type: String, default: new Date() },
   tag: {type: String},
   like: [{type: mongoose.Schema.Types.ObjectId, ref: "Like"}],
+  dateofA:{ type:String},
+  dateofE:{ type:String},
 
 });
 

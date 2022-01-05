@@ -14,7 +14,7 @@ const { authentication } = require("./../middleware/authentication");
 const { authorization } = require("./../middleware/authorization");
 const meetupRouter = express.Router();
 
-meetupRouter.post("/newmeetup", createMeetup);
+meetupRouter.post("/newmeetup",authentication, createMeetup);
 meetupRouter.get("/meetup", getMeetsup);
 meetupRouter.get("/meetup/:id", getMeetupById);
 meetupRouter.delete("/deletebyuser/:id",authentication,authorization, deletedMeetupByUser);

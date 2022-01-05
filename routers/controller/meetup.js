@@ -2,15 +2,16 @@ const meetupModel = require("./../../db/models/meetup");
 const likeModel = require("./../../db/models/like");
 const commentModel = require("./../../db/models/comment");
 const createMeetup = (req, res) => {
-    const {_id} = req.params
-    const {titel,desc,img,userId} = req.body;
+    const {titel,desc,img,userId,dateofA,dateofE} = req.body;
 
     const newMeetup = new meetupModel({
       userId:req.token.id,
       titel: titel,
       desc: desc,
       img:img,
-        
+      dateofA:dateofA,
+      dateofE:dateofE,
+
     });
     newMeetup
     .save()
@@ -26,12 +27,13 @@ const createMeetup = (req, res) => {
 const getMeetsup = (req, res) => {
     meetupModel
        .find({isdle:false})
-       .populate("comment","desc -_id")
+       .populate("comment")
        .populate("like")
        .populate("userId","username  avatar -_id")
 
       .then((result) => {
         res.send(result);
+
       })
       .catch((err) => {
         res.send(err);
@@ -40,14 +42,14 @@ const getMeetsup = (req, res) => {
 
 const getMeetupById = (req, res) => {
   const { id } = req.params;
-  console.log(id);
   meetupModel
     .findById(id) 
-    .populate("comment","desc -_id")
+    .populate("comment")
     .populate("like")
-    .populate("userId","username  avatar -_id")
+    .populate("userId")
     .then((result) => {
       res.status(200).json(result);
+
     })
     .catch((err) => {
       res.status(400).json(err);

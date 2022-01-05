@@ -2,13 +2,14 @@ const serviceModel = require("./../../db/models/service");
 
 const createservice = (req, res) => {
     const {_id} = req.params
-    const {titel,desc,img,userId} = req.body;
+    const {titel,desc,img,userId,price} = req.body;
 
     const newservice = new serviceModel({
       userId:req.token.id,
       titel: titel,
         desc: desc,
       img:img,
+      price:price,
         
     });
     newservice
@@ -24,7 +25,7 @@ const createservice = (req, res) => {
 const getServices = (req, res) => {
     serviceModel
          .find({isdel:false})
-         .populate("comment","desc -_id")
+         .populate("comment")
          .populate("like")
          .populate("userId","username  avatar -_id")
         .then((result) => {
@@ -40,9 +41,9 @@ const getServices = (req, res) => {
     console.log(id);
     serviceModel
       .findById(id)
-      .populate("comment","desc -_id")
+      .populate("comment")
       .populate("like")
-      .populate("userId","username  avatar -_id")
+      .populate("userId")
       
       .then((result) => {
         res.status(200).json(result);

@@ -18,7 +18,7 @@ const transport = nodemailer.createTransport({
  
 
   const Register = async (req, res) => {
-    const { email, password, username } = req.body;
+    const { email, password, username,avatar } = req.body;
     const lowerEmail = email.toLowerCase();
     // console.log("hereeeeeeeeeeeeeeeee "+req.token);
     // console.log(req);
@@ -37,6 +37,7 @@ const transport = nodemailer.createTransport({
       passwordCode: "",
       username,
       activeCode,
+      avatar,
     });
     newUser
       .save()

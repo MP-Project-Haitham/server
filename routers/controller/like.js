@@ -12,7 +12,6 @@ const createLike = (req, res) => {
 });
   newlike
     .save()
-    .populate("userId")
     .then((result) => {
         postModel
         .findByIdAndUpdate(postId, { $push : {like: result._id}},{ upsert: true })
@@ -27,9 +26,8 @@ const createLike = (req, res) => {
     });
 };
 const createLikeMeetup = (req, res) => {
-    console.log(req.token);
   const { userId,meetupId } = req.body;
-  const newlike = new commentModel({
+  const newlike = new likeModel({
     userId:req.token.id,
     meetupId,
 });
@@ -37,7 +35,7 @@ const createLikeMeetup = (req, res) => {
     .save()
     .then((result) => {
         meetupModel
-        .findByIdAndUpdate(meetupId, { $push : {like: result._id}})
+        .findByIdAndUpdate(meetupId, { $push : {like: result._id}},{ upsert: true })
         .then((result)=>{
             res.status(201).json(result);
         })
@@ -48,17 +46,16 @@ const createLikeMeetup = (req, res) => {
     });
 };
 const createLikeService = (req, res) => {
-    console.log(req.token);
   const { userId,serviceId } = req.body;
-  const newComent = new commentModel({
+  const newlike = new likeModel({
     userId:req.token.id,
     serviceId,
 });
-  newLike
+newlike
     .save()
     .then((result) => {
         serviceModel
-        .findByIdAndUpdate(meetupId, { $push : {comment: result._id}})
+        .findByIdAndUpdate(serviceId, { $push : {like: result._id}})
         .then((result)=>{
             res.status(201).json(result);
         })

@@ -26,9 +26,9 @@ const createComment = (req, res) => {
     });
 };
 const createCommentMeetup = (req, res) => {
-    console.log(req.token);
   const { userId, desc,meetupId } = req.body;
   const newComent = new commentModel({
+    userId: req.token.id,
     desc,
     meetupId,
 });
@@ -47,9 +47,9 @@ const createCommentMeetup = (req, res) => {
     });
 };
 const createCommentService = (req, res) => {
-    console.log(req.token);
   const { userId, desc,serviceId } = req.body;
   const newComent = new commentModel({
+    userId: req.token.id,
     desc,
     serviceId,
 });
@@ -57,7 +57,7 @@ const createCommentService = (req, res) => {
     .save()
     .then((result) => {
         serviceModel
-        .findByIdAndUpdate(meetupId, { $push : {comment: result._id}})
+        .findByIdAndUpdate(serviceId, { $push : {comment: result._id}})
         .then((result)=>{
             res.status(201).json(result);
         })
@@ -69,11 +69,43 @@ const createCommentService = (req, res) => {
 };
 
 
+
 const getComment = (req, res) => {
   const id = req.params.id
   commentModel
     .find({postId:id})
     .populate("postId userId")
+
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+const getCommentm = (req, res) => {
+  const id = req.params.id
+  commentModel
+    .find({meetupId:id})
+    .populate("meetupId")
+    .populate("userId")
+
+    
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+const getComments = (req, res) => {
+  const id = req.params.id
+  commentModel
+    .find({serviceId:id})
+    .populate("serviceId")
+    .populate("userId")
+
+    
     .then((result) => {
       res.status(200).json(result);
     })
@@ -122,4 +154,6 @@ module.exports = {
   createCommentService,
   updateComment,
   deletedComment,
+  getCommentm,
+  getComments,
 };

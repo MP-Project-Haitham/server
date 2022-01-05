@@ -32,25 +32,15 @@ const getPosts = (req, res) => {
        .populate("like")
        .populate("userId","username  avatar -_id")
 
-
       .then((result) => {
+        
         res.send(result);
       })
       .catch((err) => {
         res.send(err);
       });
 };
-// const getPost = (req, res) => {
-//   postModel
-//     .find({})
-//     .populate("likeId commentId")
-//     .then((result) => {
-//       res.status(200).json(result);
-//     })
-//     .catch((err) => {
-//       res.status(400).json(err);
-//     });
-// };
+
 const getPostById = (req, res) => {
   const { id } = req.params;
   console.log(id);
@@ -58,7 +48,7 @@ const getPostById = (req, res) => {
     .findById(id)
     .populate("comment")
     .populate("like")
-    .populate("userId","username avatar -_id")
+    .populate("userId")
 
     .then((result) => {
       res.status(200).json(result);
