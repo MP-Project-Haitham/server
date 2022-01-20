@@ -19,9 +19,9 @@ meetupRouter.get("/meetup", getMeetsup);
 meetupRouter.get("/meetup/:id", getMeetupById);
 meetupRouter.delete("/deletebyuser/:id",authentication,authorization, deletedMeetupByUser);
 //admin
-meetupRouter.put( "/updatemeetuptitel/:id" ,authentication,authorization,updateMeetupTitel);
+meetupRouter.put( "/updatemeetuptitel/:id" ,authentication,updateMeetupTitel);
 meetupRouter.put("/updatemeetupimg/:id",authentication,authorization, updateImgMeetup);
-meetupRouter.put( "/updatemeetupDesc/:id",authentication,authorization ,updateDescMeetup);
+meetupRouter.put( "/updatemeetupDesc/:id",authentication ,updateDescMeetup);
 meetupRouter.put( "/closemeetup/:id" ,authentication,authorization,closeMeetup);
 
 

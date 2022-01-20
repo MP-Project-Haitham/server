@@ -87,6 +87,7 @@ const updateDescPost = (req, res) => {
       res.status(400).json(err);
     });
 };
+
 const updatePostTitel = (req, res) => {
   const { id } = req.params;
   const {titel} = req.body;
@@ -102,6 +103,7 @@ const updatePostTitel = (req, res) => {
       res.status(400).json(err);
     });
 };
+
 const deletedPostByUser = (req, res) => {
   const { id } = req.params;
 

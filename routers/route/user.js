@@ -15,6 +15,8 @@ const {
     getAllUsers,
     bannedUser,
     unbannedUser,
+    updateusername,
+    updateavatar,
 } = require("./../controller/user");
 // const { authentication } = require("./../middleware/authentication");
 // const { authorization } = require("./../middleware/authorization");
@@ -25,6 +27,9 @@ userRouter.post("/login", login);
 userRouter.post("/verify_account", verifyAccount);
 userRouter.post("/email_check", checkEmail);
 userRouter.post("/reset_pass", resetPassword);
+userRouter.post("/updateusername/:id", updateusername);
+userRouter.post("/updateavatar/:id", updateavatar);
+
 
 // userRouter.get(
 //   "/auth/google",
