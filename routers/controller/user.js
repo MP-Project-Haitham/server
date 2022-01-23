@@ -227,8 +227,10 @@ const updateavatar = (req, res) => {
 };
 
   const getUser = (req, res) => {
+    const { id } = req.params;
+
     userModel
-      .find({})
+      .find({ _id: id })
       .then((result) => {
         res.status(200).json(result);
       })
