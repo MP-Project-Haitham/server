@@ -210,6 +210,37 @@ const updateusername = (req, res) => {
     });
 };
 
+const updatehometown = (req, res) => {
+  const { id } = req.params;
+  const {hometown} = req.body;
+  console.log(id);
+  userModel
+    .findByIdAndUpdate(id,{$set: { hometown }}, { new: true })
+    .exec()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+const updateBio = (req, res) => {
+  const { id } = req.params;
+  const {bio} = req.body;
+  console.log(id);
+  userModel
+    .findByIdAndUpdate(id,{$set: { bio }}, { new: true })
+    .exec()
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+};
+
 const updateavatar = (req, res) => {
   const { id } = req.params;
   const {avatar} = req.body;
@@ -312,5 +343,7 @@ const updateavatar = (req, res) => {
     unbannedUser,
     updateusername,
     updateavatar,
+    updatehometown,
+    updateBio,
   };
   

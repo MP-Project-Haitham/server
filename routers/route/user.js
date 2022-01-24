@@ -17,6 +17,8 @@ const {
     unbannedUser,
     updateusername,
     updateavatar,
+    updatehometown,
+    updateBio,
 } = require("./../controller/user");
 const { authentication } = require("./../middleware/authentication");
 const { authorization } = require("./../middleware/authorization");
@@ -27,8 +29,11 @@ userRouter.post("/login", login);
 userRouter.post("/verify_account", verifyAccount);
 userRouter.post("/email_check", checkEmail);
 userRouter.post("/reset_pass", resetPassword);
-userRouter.post("/updateusername/:id" ,updateusername);
-userRouter.post("/updateavatar/:id", updateavatar);
+userRouter.put("/updateusername/:id" ,updateusername);
+userRouter.put("/updateavatar/:id", updateavatar);
+userRouter.put("/updatehometown/:id", updatehometown);
+userRouter.put("/updatebio/:id", updateBio);
+
 
 
 // userRouter.get(
